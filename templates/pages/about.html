@@ -1,0 +1,99 @@
+{% extends 'base.html' %} 
+
+{% load static %}
+
+{% block title %} | About Us {% endblock %}
+
+{% block content %}
+<section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-4">About BT Real Estate</h1>
+          <p class="lead">I will forever believe that buying a home is a great investment. Why? Because you can’t live in a stock certificate. You can’t live in a mutual fund.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section id="bc" class="mt-3">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index' %}">
+              <i class="fas fa-home"></i> Home</a>
+          </li>
+          <li class="breadcrumb-item active"> About</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <section id="about" class="py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <h2>We Search For The Perfect Home</h2>
+          <p class="lead">At your service ALWAYS!</p>
+          <img src="{% static 'img/about.jpg' %}" alt="">
+          <p class="mt-4">Home is a place blessed, where you and your family can be secure, have all you need, and share your sadness and happiness. Where you can help each other as a family. It does not matter how big or small. I live in a small room with my two sons, and we share our thoughts.
+            At BT real estate we work to find you the right Home.
+          </p>
+        </div>
+        <div class="col-md-4">
+          {% if mvp_realtors %}
+            {% for realtor in mvp_realtors %}
+            <div class="card">
+                <img class="card-img-top" src="{{ realtor.photo.url }}" alt="Seller of the month">
+                <div class="card-body">
+                  <h5 class="card-title">Seller Of The Month</h5>
+                  <h6 class="text-secondary">{{ realtor.name }}</h6>
+                  <p class="card-text">{{ realtor.description }}
+                  </p>
+                </div>
+              </div>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work -->
+  <section id="work" class="bg-dark text-white text-center">
+    <h2 class="display-4">We Work For You</h2>
+    <h4>Honesty and integrity, Attention to detail</h4>
+    <hr>
+    <a href="{% url 'listings' %}" class="btn btn-secondary text-white btn-lg">View Our Featured Listings</a>
+  </section>
+
+  <!-- Team -->
+  <section id="team" class="py-5">
+    <div class="container">
+      <h2 class="text-center">Our Team</h2>
+      <div class="row text-center">
+        {% if realtors %}
+          {% for realtor in realtors %}
+          <div class="col-md-4">
+              <img src="{{ realtor.photo.url }}" alt="" class="rounded-circle mb-3">
+              <h4>{{ realtor.name }}</h4>
+              <p class="text-success">
+                <i class="fas fa-award text-success mb-3"></i> Realtor</p>
+              <hr>
+              <p>
+                <i class="fas fa-phone"></i> {{ realtor.phone }}</p>
+              <p>
+                <i class="fas fa-envelope-open"></i> {{ realtor.email }}</p>
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="col-md-12">
+            <p>No Realtors Available</p>
+          </div>
+        {% endif %}       
+      </div>
+    </div>
+  </section>
+{% endblock %}
